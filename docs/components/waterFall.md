@@ -114,6 +114,7 @@ let options = ref({
 | itemBottomGap | number | 0 | 每个数据项底部间距，单位为px |
 | bottomLoading | boolean | false | 是否开启触底加载更多 |
 | loadDistance | number | 0 | 触底加载中，开始加载数据的范围，单位为px |
+| data | Array | 无 | 数据项。如有图片，请使用imgUrl属性（仅支持每项数据一张图片） |
 
 ## 组件事件
 ### `addData`

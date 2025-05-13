@@ -3,10 +3,12 @@ import { WaterFall } from '@goose-tools/components'
 import '@goose-tools/components/goose-tools-componets.css'
 import { ref } from 'vue'
 
+const waterFallRef = ref(null)
+
 let options = ref({
   column: 3,
   gap: 10,
-  bottomLoading: true,
+  bottomLoading: false,
   loadDistance: 100,
   data: [
     { msg: '远旅', imgUrl: 'https://gamecms-res.sl916.com/official_website_resource/50001/4/PICTURE/20250501/524%201440x2560_c5245dd009d242b0871d81f23adeb49f.jpg' },
@@ -25,7 +27,11 @@ let addDataList = [
 let isAdd = true
 function addData () {
   if (isAdd) {
-    options.value.data.push(...addDataList)
+    waterFallRef.value.changeLoading(true)
+    setTimeout(() => {
+      options.value.data.push(...addDataList)
+      waterFallRef.value.changeLoading(false)
+    }, 8000)
   }
   isAdd = false
 }
@@ -40,9 +46,9 @@ function addData () {
     "
   >
     <WaterFall
+      ref="waterFallRef"
       :options="options" 
       style="width: 800px;"
-      @addData="addData"
     >
       <template v-slot="soltProps">
         <div>{{ soltProps.item.msg }}</div>

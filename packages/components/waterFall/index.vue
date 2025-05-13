@@ -42,8 +42,16 @@ let loading = ref(true)
 // 触底加载观察者
 let intersectionObserver = {} as IntersectionObserver
 let loadingObserveDom
+let loadingDomHeight = 0
 
 const emits = defineEmits(['addData', 'onloaded'])
+defineExpose({
+  changeLoading
+})
+
+function changeLoading (value) {
+  loading.value = value
+}
 
 // 初始化 
 function init() {
@@ -184,6 +192,10 @@ onMounted(() => {
   init()
   calculateHeight(0, props.options.data.length)
   loadingObserveDom = document.getElementById('gooseWaterFallLoadMore')
+  let loadingDom = document.getElementById('gooseWaterFallLoading')
+  if (loadingDom) {
+    loadingDomHeight = loadingDom.clientHeight
+  }
 })
 onBeforeUnmount(() => {
   if (props.options.bottomLoading && intersectionObserver && loadingObserveDom) {
@@ -196,7 +208,7 @@ onBeforeUnmount(() => {
   <section
     id="gooseWaterFallContainer" 
     class="goose-water-fall-container"
-    :style="{ height: boxHeight + 'px' }"
+    :style="{ height: boxHeight + (props.options.bottomLoading ? loadingDomHeight : 0) + 'px' }"
   >
     <div
       v-for="(item, index) in props.options.data"
@@ -219,9 +231,19 @@ onBeforeUnmount(() => {
         top: `${Math.max(...columnHeight)}px`,
       }"
     ></div>
-    <div v-show="loading" class="goose-water-fall-loading">
+    <div
+      v-show="loading"
+      id="gooseWaterFallLoading"
+      class="goose-water-fall-loading"
+      :style="{
+        left: '0px',
+        top: `${Math.max(...columnHeight)}px`,
+      }"
+    >
       <slot name="loading">
+        <div style="width: 100%;">
         <div style="text-align: center;">加载中...</div>
+        </div>
       </slot>
     </div>
   </section>
@@ -240,5 +262,9 @@ onBeforeUnmount(() => {
   position: absolute;
   width: 1x;
   height: 1px;
+}
+.goose-water-fall-loading {
+  position: absolute;
+  width: 100%;
 }
 </style>
