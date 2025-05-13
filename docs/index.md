@@ -9,7 +9,7 @@ hero:
   actions:
     - theme: brand
       text: 快速上手
-      link: /sign
+      link: /components/sign
     # - theme: alt
     #   text: API Examples
     #   link: /api-examples

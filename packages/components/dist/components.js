@@ -1,11 +1,11 @@
-import { defineComponent as _, ref as v, onMounted as w, createElementBlock as b, openBlock as k, createElementVNode as S, computed as A, reactive as B, normalizeClass as Y, unref as y, renderSlot as x, nextTick as $ } from "vue";
-function L(f, s) {
-  const i = f;
-  return i.install = (t) => {
-    t.component(i.name, f);
-  }, i;
+import { defineComponent as A, ref as S, onMounted as E, createElementBlock as $, openBlock as B, createElementVNode as _, computed as M, reactive as N, normalizeClass as D, unref as L, renderSlot as W, nextTick as Y, watch as R, onBeforeUnmount as C, normalizeStyle as k, withDirectives as q, Fragment as H, renderList as X, vShow as O } from "vue";
+function I(p, c) {
+  const e = p;
+  return e.install = (t) => {
+    t.component(e.name, p);
+  }, e;
 }
-const E = { class: "sign-board-box" }, R = ["width", "height"], N = /* @__PURE__ */ _({
+const P = { class: "sign-board-box" }, T = ["width", "height"], j = /* @__PURE__ */ A({
   __name: "index",
   props: {
     width: {
@@ -33,52 +33,52 @@ const E = { class: "sign-board-box" }, R = ["width", "height"], N = /* @__PURE__
       default: 2
     }
   },
-  setup(f, { expose: s }) {
-    const i = f, t = v(null);
-    let n = null, r = [], a = -1, o = { x: null, y: null };
-    function h(e) {
-      (Math.abs(e.offsetX - o.x) >= 1 || Math.abs(e.offsetY - o.y) >= 1) && (n.strokeStyle = i.color, n.lineWidth = i.lineWidth, n.lineJoin = "round", n.beginPath(), n.moveTo(o.x, o.y), o.x = e.offsetX, o.y = e.offsetY, n.lineTo(o.x, o.y), r[a].push({ x: e.offsetX, y: e.offsetY }), n.stroke());
+  setup(p, { expose: c }) {
+    const e = p, t = S(null);
+    let l = null, i = [], u = -1, r = { x: null, y: null };
+    function g(o) {
+      (Math.abs(o.offsetX - r.x) >= 1 || Math.abs(o.offsetY - r.y) >= 1) && (l.strokeStyle = e.color, l.lineWidth = e.lineWidth, l.lineJoin = "round", l.beginPath(), l.moveTo(r.x, r.y), r.x = o.offsetX, r.y = o.offsetY, l.lineTo(r.x, r.y), i[u].push({ x: o.offsetX, y: o.offsetY }), l.stroke());
     }
-    w(() => {
-      n = t.value.getContext("2d"), n.fillStyle = i.backgroundcolor, n.fillRect(0, 0, i.width, i.height), t.value.addEventListener("pointerdown", function(e) {
-        o.x = e.offsetX, o.y = e.offsetY, a < r.length - 1 && r.splice(a + 1), r.push([]), a = r.length - 1, r[a].push({ x: e.offsetX, y: e.offsetY }), t.value.addEventListener("pointermove", h);
+    E(() => {
+      l = t.value.getContext("2d"), l.fillStyle = e.backgroundcolor, l.fillRect(0, 0, e.width, e.height), t.value.addEventListener("pointerdown", function(o) {
+        r.x = o.offsetX, r.y = o.offsetY, u < i.length - 1 && i.splice(u + 1), i.push([]), u = i.length - 1, i[u].push({ x: o.offsetX, y: o.offsetY }), t.value.addEventListener("pointermove", g);
       }), t.value.addEventListener("pointerup", function() {
-        t.value.removeEventListener("pointermove", h);
+        t.value.removeEventListener("pointermove", g);
       });
     });
-    function l() {
-      r = [], a = -1, n.clearRect(0, 0, i.width, i.height), console.log("component clear", i.width, i.height);
+    function n() {
+      i = [], u = -1, l.clearRect(0, 0, e.width, e.height), console.log("component clear", e.width, e.height);
     }
-    function m() {
-      if (a >= 0) {
-        n.clearRect(0, 0, i.width, i.height), n.strokeStyle = i.color, n.lineWidth = i.lineWidth, n.lineJoin = "round";
-        for (let e = 0; e < a; e++)
-          for (let u = 0; u < r[e].length - 1; u++)
-            n.beginPath(), n.moveTo(r[e][u].x, r[e][u].y), n.lineTo(r[e][u + 1].x, r[e][u + 1].y), n.stroke();
-        a -= 1;
+    function x() {
+      if (u >= 0) {
+        l.clearRect(0, 0, e.width, e.height), l.strokeStyle = e.color, l.lineWidth = e.lineWidth, l.lineJoin = "round";
+        for (let o = 0; o < u; o++)
+          for (let m = 0; m < i[o].length - 1; m++)
+            l.beginPath(), l.moveTo(i[o][m].x, i[o][m].y), l.lineTo(i[o][m + 1].x, i[o][m + 1].y), l.stroke();
+        u -= 1;
       }
     }
-    function p() {
-      if (a < r.length - 1) {
-        a++;
-        for (let e = 0; e < r[a].length - 1; e++)
-          n.beginPath(), n.moveTo(r[a][e].x, r[a][e].y), n.lineTo(r[a][e + 1].x, r[a][e + 1].y), n.stroke();
+    function w() {
+      if (u < i.length - 1) {
+        u++;
+        for (let o = 0; o < i[u].length - 1; o++)
+          l.beginPath(), l.moveTo(i[u][o].x, i[u][o].y), l.lineTo(i[u][o + 1].x, i[u][o + 1].y), l.stroke();
       }
     }
-    function g() {
-      let e = document.createElement("a");
-      e.href = t.value.toDataURL(), e.download = "sign.png", e.click(), document.removeChild(e);
+    function b() {
+      let o = document.createElement("a");
+      o.href = t.value.toDataURL(), o.download = "sign.png", o.click(), document.removeChild(o);
     }
-    return s({ clear: l, back: m, restore: p, download: g }), (e, u) => (k(), b("div", E, [
-      S("canvas", {
+    return c({ clear: n, back: x, restore: w, download: b }), (o, m) => (B(), $("div", P, [
+      _("canvas", {
         ref_key: "deSignBoard",
         ref: t,
-        width: f.width + f.unit,
-        height: f.height + f.unit
-      }, null, 8, R)
+        width: p.width + p.unit,
+        height: p.height + p.unit
+      }, null, 8, T)
     ]));
   }
-}), q = /* @__PURE__ */ _({
+}), z = /* @__PURE__ */ A({
   __name: "index",
   props: {
     options: {
@@ -89,80 +89,80 @@ const E = { class: "sign-board-box" }, R = ["width", "height"], N = /* @__PURE__
       require: !0
     }
   },
-  setup(f) {
-    const s = f, i = {
+  setup(p) {
+    const c = p, e = {
       speed: 0.4,
       wheelSpeed: 5,
       direction: "up",
       scrollNum: 5,
       isStop: !0
-    }, t = A(() => Object.assign(i, s.options)), n = v(null), r = v(null), a = v(null), o = v(), l = B({
+    }, t = M(() => Object.assign(e, c.options)), l = S(null), i = S(null), u = S(null), r = S(), n = N({
       up: [0, 0],
       down: [0, -100],
       left: [0, 0],
       right: [-100, 0]
     }[t.value.direction]);
+    function x() {
+      r.value && (cancelAnimationFrame(r.value), r.value = null);
+    }
+    function w() {
+      x(), t.value.direction === "up" ? n[1] > -100 ? n[1] -= t.value.speed : n[1] = 0 : t.value.direction === "down" ? n[1] < 0 ? n[1] += t.value.speed : n[1] = -100 : t.value.direction === "left" ? n[0] > -100 ? n[0] -= t.value.speed : n[0] = 0 : t.value.direction === "right" && (n[0] < 0 ? n[0] += t.value.speed : n[0] = -100), i.value.style.transform = `translateX(${n[0]}%) translateY(${n[1]}%)`, u.value.style.transform = `translateX(${n[0]}%) translateY(${n[1]}%)`, r.value = requestAnimationFrame(w);
+    }
+    function b() {
+      x();
+    }
+    function o() {
+      c.scrollData.length >= t.value.scrollNum && b();
+    }
     function m() {
-      o.value && (cancelAnimationFrame(o.value), o.value = null);
+      c.scrollData.length >= t.value.scrollNum && (r.value = requestAnimationFrame(w));
     }
-    function p() {
-      m(), t.value.direction === "up" ? l[1] > -100 ? l[1] -= t.value.speed : l[1] = 0 : t.value.direction === "down" ? l[1] < 0 ? l[1] += t.value.speed : l[1] = -100 : t.value.direction === "left" ? l[0] > -100 ? l[0] -= t.value.speed : l[0] = 0 : t.value.direction === "right" && (l[0] < 0 ? l[0] += t.value.speed : l[0] = -100), r.value.style.transform = `translateX(${l[0]}%) translateY(${l[1]}%)`, a.value.style.transform = `translateX(${l[0]}%) translateY(${l[1]}%)`, o.value = requestAnimationFrame(p);
-    }
-    function g() {
-      m();
-    }
-    function e() {
-      s.scrollData.length >= t.value.scrollNum && g();
-    }
-    function u() {
-      s.scrollData.length >= t.value.scrollNum && (o.value = requestAnimationFrame(p));
-    }
-    return w(() => {
-      s.scrollData.length >= t.value.scrollNum && (o.value = requestAnimationFrame(p), t.value.isStop && n.value.addEventListener("wheel", (d) => {
+    return E(() => {
+      c.scrollData.length >= t.value.scrollNum && (r.value = requestAnimationFrame(w), t.value.isStop && l.value.addEventListener("wheel", (v) => {
         if (t.value.direction === "up" || t.value.direction === "down")
-          if (d.deltaY < 0) {
-            let c = l[1] + t.value.wheelSpeed;
-            l[1] = c > 0 ? -100 : c;
+          if (v.deltaY < 0) {
+            let s = n[1] + t.value.wheelSpeed;
+            n[1] = s > 0 ? -100 : s;
           } else {
-            let c = l[1] - t.value.wheelSpeed;
-            l[1] = c < -100 ? 0 : c;
+            let s = n[1] - t.value.wheelSpeed;
+            n[1] = s < -100 ? 0 : s;
           }
         else if (t.value.direction === "left" || t.value.direction === "right")
-          if (d.deltaY < 0) {
-            let c = l[0] + t.value.wheelSpeed;
-            l[0] = c > 0 ? 0 : c;
+          if (v.deltaY < 0) {
+            let s = n[0] + t.value.wheelSpeed;
+            n[0] = s > 0 ? 0 : s;
           } else {
-            let c = l[0] - t.value.wheelSpeed;
-            l[0] = c < -100 ? -100 : c;
+            let s = n[0] - t.value.wheelSpeed;
+            n[0] = s < -100 ? -100 : s;
           }
-        r.value.style.transform = `translateX(${l[0]}%) translateY(${l[1]}%)`, a.value.style.transform = `translateX(${l[0]}%) translateY(${l[1]}%)`;
+        i.value.style.transform = `translateX(${n[0]}%) translateY(${n[1]}%)`, u.value.style.transform = `translateX(${n[0]}%) translateY(${n[1]}%)`;
       }));
-    }), (d, c) => (k(), b("div", {
+    }), (v, s) => (B(), $("div", {
       ref_key: "deSeamlessScrollBox",
-      ref: n,
-      class: Y(["seamless-scroll-box", {
-        flex: y(t).direction === "left" || y(t).direction === "right"
+      ref: l,
+      class: D(["seamless-scroll-box", {
+        flex: L(t).direction === "left" || L(t).direction === "right"
       }]),
-      onMouseenter: e,
-      onMouseleave: u
+      onMouseenter: o,
+      onMouseleave: m
     }, [
-      S("section", {
+      _("section", {
         ref_key: "listA",
-        ref: r,
+        ref: i,
         class: "seamless-scroll-list"
       }, [
-        x(d.$slots, "default")
+        W(v.$slots, "default")
       ], 512),
-      S("section", {
+      _("section", {
         ref_key: "listB",
-        ref: a,
+        ref: u,
         class: "seamless-scroll-list"
       }, [
-        x(d.$slots, "default")
+        W(v.$slots, "default")
       ], 512)
     ], 34));
   }
-}), I = {
+}), G = {
   __name: "index",
   props: {
     // 虚拟自动滚动列表的源数据
@@ -190,51 +190,167 @@ const E = { class: "sign-board-box" }, R = ["width", "height"], N = /* @__PURE__
       default: 10
     }
   },
-  setup(f) {
-    const s = f;
-    let i = v(null), t = v(null), n = v([]), r, a = 10, o = 0, h;
-    w(() => {
-      a = s.amount, console.log(a), r = t.value.getBoundingClientRect().height, i.value.style.transform = "translateY(0)", n.value = s.dataList.slice(0, a), $(() => {
-        e = i.value.children[0].getBoundingClientRect().height, console.log(e), h = requestAnimationFrame(u), s.hoverStop && i.value.addEventListener("wheel", (d) => {
-          o += d.deltaY > 0 ? s.scrollSpeed * s.scrollRate : -s.scrollSpeed * s.scrollRate, o >= r && (o = r), o < 0 && (o = 0), i.value.style.transform = `translateY(${-1 * o}px)`;
+  setup(p) {
+    const c = p;
+    let e = S(null), t = S(null), l = S([]), i, u = 10, r = 0, g;
+    E(() => {
+      u = c.amount, console.log(u), i = t.value.getBoundingClientRect().height, e.value.style.transform = "translateY(0)", l.value = c.dataList.slice(0, u), Y(() => {
+        o = e.value.children[0].getBoundingClientRect().height, console.log(o), g = requestAnimationFrame(m), c.hoverStop && e.value.addEventListener("wheel", (v) => {
+          r += v.deltaY > 0 ? c.scrollSpeed * c.scrollRate : -c.scrollSpeed * c.scrollRate, r >= i && (r = i), r < 0 && (r = 0), e.value.style.transform = `translateY(${-1 * r}px)`;
         });
       });
     });
-    function l() {
-      h && (cancelAnimationFrame(h), h = void 0);
+    function n() {
+      g && (cancelAnimationFrame(g), g = void 0);
     }
+    function x() {
+      c.hoverStop && n();
+    }
+    function w() {
+      c.hoverStop && m();
+    }
+    function b(v) {
+      console.log(v);
+    }
+    let o = 0;
     function m() {
-      s.hoverStop && l();
+      n(), r += c.scrollSpeed, r >= o && (r -= o, l.value.push(c.dataList[u++]), u >= c.dataList.length && (u = 0), o = e.value.children[1].getBoundingClientRect().height, l.value.shift()), e.value.style.transform = `translateY(${-1 * r}px)`, g = requestAnimationFrame(m);
     }
-    function p() {
-      s.hoverStop && u();
-    }
-    function g(d) {
-      console.log(d);
-    }
-    let e = 0;
-    function u() {
-      l(), o += s.scrollSpeed, o >= e && (o -= e, n.value.push(s.dataList[a++]), a >= s.dataList.length && (a = 0), e = i.value.children[1].getBoundingClientRect().height, n.value.shift()), i.value.style.transform = `translateY(${-1 * o}px)`, h = requestAnimationFrame(u);
-    }
-    return (d, c) => (k(), b("section", {
+    return (v, s) => (B(), $("section", {
       ref_key: "virtualInfiniteScrollBox",
       ref: t,
       class: "virtual-infinite-scroll-box"
     }, [
-      S("div", {
+      _("div", {
         ref_key: "virtualInfiniteScrollList",
-        ref: i,
-        onMouseenter: m,
-        onMouseleave: p,
-        onScroll: g
+        ref: e,
+        onMouseenter: x,
+        onMouseleave: w,
+        onScroll: b
       }, [
-        x(d.$slots, "default", { slotItem: y(n) })
+        W(v.$slots, "default", { slotItem: L(l) })
       ], 544)
     ], 512));
   }
-}, C = L(N), D = L(q), F = L(I);
+}, J = ["id"], U = { class: "goose-water-fall-loading" }, K = /* @__PURE__ */ A({
+  __name: "index",
+  props: {
+    options: {}
+  },
+  emits: ["addData", "onloaded"],
+  setup(p, { emit: c }) {
+    const e = p;
+    let t = 0, l = S([]), i = S([]), u = M(() => Math.max(...i.value)), r = S(!0), g = {}, n;
+    const x = c;
+    function w() {
+      var f;
+      t = ((((f = document.getElementById("gooseWaterFallContainer")) == null ? void 0 : f.clientWidth) || 0) - e.options.gap * (e.options.column - 1)) / e.options.column, l.value = [];
+      for (let d = 0; d < e.options.data.length; d++)
+        l.value.push({ x: 0, y: 0 });
+      i.value = new Array(e.options.column).fill(0), e.options.data.forEach((d) => {
+        d.width = t, d.imgWidth || (d.imgWidth = t);
+      });
+    }
+    function b(s, f) {
+      let d = [];
+      e.options.data.forEach((a, h) => {
+        a.imgHeight || d.push(o(a.imgUrl, a.imgWidth).then((y) => {
+          a.imgHeight = Number(y);
+        }));
+      }), Promise.all(d).then(() => {
+        r.value = !1, Y(() => {
+          e.options.data.forEach((a, h) => {
+            let y = document.getElementById("gooseWaterFallItem" + h);
+            y && !a.height && (a.height = y.clientHeight);
+          }), m(s, f);
+        });
+      });
+    }
+    function o(s, f) {
+      return new Promise((d, a) => {
+        let h = new Image();
+        h.src = s, h.onload = function() {
+          let y = f * h.height / h.width;
+          d(y);
+        }, h.onerror = function() {
+          a(new Error("Image load error, url:" + s));
+        };
+      });
+    }
+    function m(s, f) {
+      let d = e.options.itemBottomGap || 0;
+      for (let a = s; a < f; a++) {
+        let h = e.options.data[a];
+        if (a < e.options.column)
+          i.value[a] += h.height + d, l.value[a].y = 0, l.value[a].x = (h.width + e.options.gap) * a;
+        else {
+          let y = Math.min(...i.value), F = i.value.indexOf(y);
+          l.value[a].y = y, l.value[a].x = (h.width + e.options.gap) * F, i.value[F] += h.height + d;
+        }
+      }
+      e.options.bottomLoading && v(), x("onloaded");
+    }
+    function v() {
+      var s;
+      g = new IntersectionObserver((f) => {
+        f[0].isIntersecting && x("addData");
+      }, {
+        root: (s = document.getElementById("gooseWaterFallContainer")) == null ? void 0 : s.parentElement,
+        rootMargin: (e.options.loadDistance || 0) + "px"
+      }), n && g.observe(n);
+    }
+    return e.options.bottomLoading && R(() => e.options.data.length, (s, f) => {
+      let d = s - f;
+      if (d > 0) {
+        for (let a = 0; a < d; a++)
+          l.value.push({ x: 0, y: 0 });
+        for (let a = f; a < s; a++)
+          e.options.data[a].width = t, e.options.data[a].imgWidth || (e.options.data[a].imgWidth = t);
+        b(f, s);
+      }
+    }), E(() => {
+      w(), b(0, e.options.data.length), n = document.getElementById("gooseWaterFallLoadMore");
+    }), C(() => {
+      e.options.bottomLoading && g && n && g.unobserve(n);
+    }), (s, f) => (B(), $("section", {
+      id: "gooseWaterFallContainer",
+      class: "goose-water-fall-container",
+      style: k({ height: L(u) + "px" })
+    }, [
+      (B(!0), $(H, null, X(e.options.data, (d, a) => {
+        var h, y;
+        return B(), $("div", {
+          class: "goose-water-fall-item",
+          id: "gooseWaterFallItem" + a,
+          style: k({
+            width: d.width + "px",
+            transform: `translate(${Number((h = L(l)[a]) == null ? void 0 : h.x)}px, ${Number((y = L(l)[a]) == null ? void 0 : y.y)}px)`
+          })
+        }, [
+          W(s.$slots, "default", { item: d })
+        ], 12, J);
+      }), 256)),
+      _("div", {
+        id: "gooseWaterFallLoadMore",
+        class: "goose-water-fall-load-more",
+        style: k({
+          left: "0px",
+          top: `${Math.max(...L(i))}px`
+        })
+      }, null, 4),
+      q(_("div", U, [
+        W(s.$slots, "loading", {}, () => [
+          f[0] || (f[0] = _("div", { style: { "text-align": "center" } }, "加载中...", -1))
+        ])
+      ], 512), [
+        [O, L(r)]
+      ])
+    ], 4));
+  }
+}), Z = I(j), V = I(z), ee = I(G), te = I(K);
 export {
-  D as SeamlessScroll,
-  C as SignBoard,
-  F as VirtualInfiniteScroll
+  V as SeamlessScroll,
+  Z as SignBoard,
+  ee as VirtualInfiniteScroll,
+  te as WaterFall
 };

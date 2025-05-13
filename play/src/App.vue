@@ -1,10 +1,11 @@
-<script setup>
+<script setup lang="ts">
+import HelloWorld from './components/HelloWorld.vue'
+import TheWelcome from './components/TheWelcome.vue'
 import WaterFallTest from './components/WaterFallTest.vue'
 </script>
 
 <template>
   <WaterFallTest></WaterFallTest>
-  <!-- <SignBoard ref="signBoard" :width="300" :height="200" :backgroundcolor="'#fff'" /> -->
   <!-- <header>
     <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
 

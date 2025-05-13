@@ -6,6 +6,7 @@ import { ref } from 'vue'
 let options = ref({
   column: 3,
   gap: 10,
+  bottomLoading: true,
   loadDistance: 100,
   data: [
     { msg: '远旅', imgUrl: 'https://gamecms-res.sl916.com/official_website_resource/50001/4/PICTURE/20250501/524%201440x2560_c5245dd009d242b0871d81f23adeb49f.jpg' },

@@ -15,9 +15,10 @@ export default defineConfig({
       {
         text: '组件',
         items: [
-          { text: '签名', link: '/sign' },
-          { text: '无缝滚动', link: '/seamlessScroll' },
-          { text: '海量数据自动滚动', link: '/virtualInfiniteScroll' },
+          { text: '签名', link: '/components/sign' },
+          { text: '无缝滚动', link: '/components/seamlessScroll' },
+          { text: '海量数据自动滚动', link: '/components/virtualInfiniteScroll' },
+          { text: '瀑布流布局', link: '/components/waterFall' },
         ]
       },
       {

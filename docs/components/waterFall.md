@@ -1,6 +1,6 @@
 # 瀑布流布局
 
-实现了瀑布流布局，可触底自动加载(需要支持IntersectionObserver API)。
+实现了瀑布流布局，可触底自动加载(需要支持IntersectionObserver API)
 
 <script setup>
 import { WaterFall } from '@goose-tools/components'
@@ -29,10 +29,10 @@ let addDataList = [
 let isAdd = true
 function addData () {
   console.log('addData')
-  // if (isAdd) {
-  //   options.value.data.push(...addDataList)
-  // }
-  // isAdd = false
+  if (isAdd) {
+    options.value.data.push(...addDataList)
+  }
+  isAdd = false
 }
 </script>
 
