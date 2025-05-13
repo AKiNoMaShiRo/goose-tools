@@ -21,6 +21,27 @@ let dataList = ref([{id: 0}, {id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6
   </template>
 </VirtualInfiniteScroll>
 
+``` js
+<script setup>
+import { VirtualInfiniteScroll } from '@goose-tools/components'
+import '@goose-tools/components/goose-tools-componets.css'
+import { ref } from 'vue'
+
+let dataList = ref([{id: 0}, {id: 1}, {id: 2}, {id: 3}, {id: 4}, {id: 5}, {id: 6}, {id: 7}, {id: 8}, {id: 9},
+  {id: 10}, {id: 11}, {id: 12}, {id: 13}, {id: 14}, {id: 15}, {id: 16}, {id: 17}, {id: 18}, {id: 19}])
+</script>
+```
+```html
+<VirtualInfiniteScroll
+  :dataList="dataList"
+>
+  <template v-slot="slotProps">
+    <div v-for="item in slotProps.slotItem" :key="item.id" :style="{ height: 20 + item.id + 'px' }">
+      这是第{{ item.id }}条数据
+    </div>
+  </template>
+</VirtualInfiniteScroll>
+```
 
 ## 组件属性
 ### `dataList`

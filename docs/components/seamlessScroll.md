@@ -22,6 +22,30 @@ let options = ref({
   <div v-for="item in scrollData" :key="item.id" style="height: 20px;">{{ item.id }}</div>
 </SeamlessScroll>
 
+
+``` js
+<script setup>
+import { SeamlessScroll } from '@goose-tools/components'
+import '@goose-tools/components/goose-tools-componets.css'
+import { ref } from 'vue'
+
+let scrollData = ref([
+  { id: 1 }, { id: 2 }, { id: 3 }, { id: 4 }, { id: 5 }, { id: 6 }, { id: 7 }, { id: 8 }, { id: 9 }, { id: 10},
+])
+let options = ref({
+  speed: 0.1,
+})
+</script>
+```
+``` html
+<SeamlessScroll 
+  :scrollData="scrollData"
+  :options="options"
+>
+  <div v-for="item in scrollData" :key="item.id" style="height: 20px;">{{ item.id }}</div>
+</SeamlessScroll>
+```
+
 ## 组件属性
 ### `scrollData`
     滚动数据

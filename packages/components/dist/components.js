@@ -35,41 +35,41 @@ const P = { class: "sign-board-box" }, T = ["width", "height"], j = /* @__PURE__
   },
   setup(p, { expose: c }) {
     const e = p, t = S(null);
-    let l = null, i = [], u = -1, r = { x: null, y: null };
-    function g(o) {
-      (Math.abs(o.offsetX - r.x) >= 1 || Math.abs(o.offsetY - r.y) >= 1) && (l.strokeStyle = e.color, l.lineWidth = e.lineWidth, l.lineJoin = "round", l.beginPath(), l.moveTo(r.x, r.y), r.x = o.offsetX, r.y = o.offsetY, l.lineTo(r.x, r.y), i[u].push({ x: o.offsetX, y: o.offsetY }), l.stroke());
+    let o = null, i = [], u = -1, r = { x: null, y: null };
+    function g(l) {
+      (Math.abs(l.offsetX - r.x) >= 1 || Math.abs(l.offsetY - r.y) >= 1) && (o.strokeStyle = e.color, o.lineWidth = e.lineWidth, o.lineJoin = "round", o.beginPath(), o.moveTo(r.x, r.y), r.x = l.offsetX, r.y = l.offsetY, o.lineTo(r.x, r.y), i[u].push({ x: l.offsetX, y: l.offsetY }), o.stroke());
     }
     E(() => {
-      l = t.value.getContext("2d"), l.fillStyle = e.backgroundcolor, l.fillRect(0, 0, e.width, e.height), t.value.addEventListener("pointerdown", function(o) {
-        r.x = o.offsetX, r.y = o.offsetY, u < i.length - 1 && i.splice(u + 1), i.push([]), u = i.length - 1, i[u].push({ x: o.offsetX, y: o.offsetY }), t.value.addEventListener("pointermove", g);
+      o = t.value.getContext("2d"), o.fillStyle = e.backgroundcolor, o.fillRect(0, 0, e.width, e.height), t.value.addEventListener("pointerdown", function(l) {
+        r.x = l.offsetX, r.y = l.offsetY, u < i.length - 1 && i.splice(u + 1), i.push([]), u = i.length - 1, i[u].push({ x: l.offsetX, y: l.offsetY }), t.value.addEventListener("pointermove", g);
       }), t.value.addEventListener("pointerup", function() {
         t.value.removeEventListener("pointermove", g);
       });
     });
     function n() {
-      i = [], u = -1, l.clearRect(0, 0, e.width, e.height), console.log("component clear", e.width, e.height);
+      i = [], u = -1, o.clearRect(0, 0, e.width, e.height), console.log("component clear", e.width, e.height);
     }
     function x() {
       if (u >= 0) {
-        l.clearRect(0, 0, e.width, e.height), l.strokeStyle = e.color, l.lineWidth = e.lineWidth, l.lineJoin = "round";
-        for (let o = 0; o < u; o++)
-          for (let m = 0; m < i[o].length - 1; m++)
-            l.beginPath(), l.moveTo(i[o][m].x, i[o][m].y), l.lineTo(i[o][m + 1].x, i[o][m + 1].y), l.stroke();
+        o.clearRect(0, 0, e.width, e.height), o.strokeStyle = e.color, o.lineWidth = e.lineWidth, o.lineJoin = "round";
+        for (let l = 0; l < u; l++)
+          for (let m = 0; m < i[l].length - 1; m++)
+            o.beginPath(), o.moveTo(i[l][m].x, i[l][m].y), o.lineTo(i[l][m + 1].x, i[l][m + 1].y), o.stroke();
         u -= 1;
       }
     }
     function w() {
       if (u < i.length - 1) {
         u++;
-        for (let o = 0; o < i[u].length - 1; o++)
-          l.beginPath(), l.moveTo(i[u][o].x, i[u][o].y), l.lineTo(i[u][o + 1].x, i[u][o + 1].y), l.stroke();
+        for (let l = 0; l < i[u].length - 1; l++)
+          o.beginPath(), o.moveTo(i[u][l].x, i[u][l].y), o.lineTo(i[u][l + 1].x, i[u][l + 1].y), o.stroke();
       }
     }
     function b() {
-      let o = document.createElement("a");
-      o.href = t.value.toDataURL(), o.download = "sign.png", o.click(), document.removeChild(o);
+      let l = document.createElement("a");
+      l.href = t.value.toDataURL(), l.download = "sign.png", l.click(), document.removeChild(l);
     }
-    return c({ clear: n, back: x, restore: w, download: b }), (o, m) => (B(), $("div", P, [
+    return c({ clear: n, back: x, restore: w, download: b }), (l, m) => (B(), $("div", P, [
       _("canvas", {
         ref_key: "deSignBoard",
         ref: t,
@@ -96,7 +96,7 @@ const P = { class: "sign-board-box" }, T = ["width", "height"], j = /* @__PURE__
       direction: "up",
       scrollNum: 5,
       isStop: !0
-    }, t = M(() => Object.assign(e, c.options)), l = S(null), i = S(null), u = S(null), r = S(), n = N({
+    }, t = M(() => Object.assign(e, c.options)), o = S(null), i = S(null), u = S(null), r = S(), n = N({
       up: [0, 0],
       down: [0, -100],
       left: [0, 0],
@@ -111,15 +111,15 @@ const P = { class: "sign-board-box" }, T = ["width", "height"], j = /* @__PURE__
     function b() {
       x();
     }
-    function o() {
+    function l() {
       c.scrollData.length >= t.value.scrollNum && b();
     }
     function m() {
       c.scrollData.length >= t.value.scrollNum && (r.value = requestAnimationFrame(w));
     }
     return E(() => {
-      c.scrollData.length >= t.value.scrollNum && (r.value = requestAnimationFrame(w), t.value.isStop && l.value.addEventListener("wheel", (v) => {
-        if (t.value.direction === "up" || t.value.direction === "down")
+      c.scrollData.length >= t.value.scrollNum && (r.value = requestAnimationFrame(w), t.value.isStop && o.value.addEventListener("wheel", (v) => {
+        if (v.preventDefault(), t.value.direction === "up" || t.value.direction === "down")
           if (v.deltaY < 0) {
             let s = n[1] + t.value.wheelSpeed;
             n[1] = s > 0 ? -100 : s;
@@ -139,11 +139,11 @@ const P = { class: "sign-board-box" }, T = ["width", "height"], j = /* @__PURE__
       }));
     }), (v, s) => (B(), $("div", {
       ref_key: "deSeamlessScrollBox",
-      ref: l,
+      ref: o,
       class: D(["seamless-scroll-box", {
         flex: L(t).direction === "left" || L(t).direction === "right"
       }]),
-      onMouseenter: o,
+      onMouseenter: l,
       onMouseleave: m
     }, [
       _("section", {
@@ -192,10 +192,10 @@ const P = { class: "sign-board-box" }, T = ["width", "height"], j = /* @__PURE__
   },
   setup(p) {
     const c = p;
-    let e = S(null), t = S(null), l = S([]), i, u = 10, r = 0, g;
+    let e = S(null), t = S(null), o = S([]), i, u = 10, r = 0, g;
     E(() => {
-      u = c.amount, console.log(u), i = t.value.getBoundingClientRect().height, e.value.style.transform = "translateY(0)", l.value = c.dataList.slice(0, u), Y(() => {
-        o = e.value.children[0].getBoundingClientRect().height, console.log(o), g = requestAnimationFrame(m), c.hoverStop && e.value.addEventListener("wheel", (v) => {
+      u = c.amount, console.log(u), i = t.value.getBoundingClientRect().height, e.value.style.transform = "translateY(0)", o.value = c.dataList.slice(0, u), Y(() => {
+        l = e.value.children[0].getBoundingClientRect().height, console.log(l), g = requestAnimationFrame(m), c.hoverStop && e.value.addEventListener("wheel", (v) => {
           r += v.deltaY > 0 ? c.scrollSpeed * c.scrollRate : -c.scrollSpeed * c.scrollRate, r >= i && (r = i), r < 0 && (r = 0), e.value.style.transform = `translateY(${-1 * r}px)`;
         });
       });
@@ -212,9 +212,9 @@ const P = { class: "sign-board-box" }, T = ["width", "height"], j = /* @__PURE__
     function b(v) {
       console.log(v);
     }
-    let o = 0;
+    let l = 0;
     function m() {
-      n(), r += c.scrollSpeed, r >= o && (r -= o, l.value.push(c.dataList[u++]), u >= c.dataList.length && (u = 0), o = e.value.children[1].getBoundingClientRect().height, l.value.shift()), e.value.style.transform = `translateY(${-1 * r}px)`, g = requestAnimationFrame(m);
+      n(), r += c.scrollSpeed, r >= l && (r -= l, o.value.push(c.dataList[u++]), u >= c.dataList.length && (u = 0), l = e.value.children[1].getBoundingClientRect().height, o.value.shift()), e.value.style.transform = `translateY(${-1 * r}px)`, g = requestAnimationFrame(m);
     }
     return (v, s) => (B(), $("section", {
       ref_key: "virtualInfiniteScrollBox",
@@ -228,7 +228,7 @@ const P = { class: "sign-board-box" }, T = ["width", "height"], j = /* @__PURE__
         onMouseleave: w,
         onScroll: b
       }, [
-        W(v.$slots, "default", { slotItem: L(l) })
+        W(v.$slots, "default", { slotItem: L(o) })
       ], 544)
     ], 512));
   }
@@ -240,13 +240,13 @@ const P = { class: "sign-board-box" }, T = ["width", "height"], j = /* @__PURE__
   emits: ["addData", "onloaded"],
   setup(p, { emit: c }) {
     const e = p;
-    let t = 0, l = S([]), i = S([]), u = M(() => Math.max(...i.value)), r = S(!0), g = {}, n;
+    let t = 0, o = S([]), i = S([]), u = M(() => Math.max(...i.value)), r = S(!0), g = {}, n;
     const x = c;
     function w() {
       var f;
-      t = ((((f = document.getElementById("gooseWaterFallContainer")) == null ? void 0 : f.clientWidth) || 0) - e.options.gap * (e.options.column - 1)) / e.options.column, l.value = [];
+      t = ((((f = document.getElementById("gooseWaterFallContainer")) == null ? void 0 : f.clientWidth) || 0) - e.options.gap * (e.options.column - 1)) / e.options.column, o.value = [];
       for (let d = 0; d < e.options.data.length; d++)
-        l.value.push({ x: 0, y: 0 });
+        o.value.push({ x: 0, y: 0 });
       i.value = new Array(e.options.column).fill(0), e.options.data.forEach((d) => {
         d.width = t, d.imgWidth || (d.imgWidth = t);
       });
@@ -254,7 +254,7 @@ const P = { class: "sign-board-box" }, T = ["width", "height"], j = /* @__PURE__
     function b(s, f) {
       let d = [];
       e.options.data.forEach((a, h) => {
-        a.imgHeight || d.push(o(a.imgUrl, a.imgWidth).then((y) => {
+        a.imgHeight || d.push(l(a.imgUrl, a.imgWidth).then((y) => {
           a.imgHeight = Number(y);
         }));
       }), Promise.all(d).then(() => {
@@ -266,7 +266,7 @@ const P = { class: "sign-board-box" }, T = ["width", "height"], j = /* @__PURE__
         });
       });
     }
-    function o(s, f) {
+    function l(s, f) {
       return new Promise((d, a) => {
         let h = new Image();
         h.src = s, h.onload = function() {
@@ -282,10 +282,10 @@ const P = { class: "sign-board-box" }, T = ["width", "height"], j = /* @__PURE__
       for (let a = s; a < f; a++) {
         let h = e.options.data[a];
         if (a < e.options.column)
-          i.value[a] += h.height + d, l.value[a].y = 0, l.value[a].x = (h.width + e.options.gap) * a;
+          i.value[a] += h.height + d, o.value[a].y = 0, o.value[a].x = (h.width + e.options.gap) * a;
         else {
           let y = Math.min(...i.value), F = i.value.indexOf(y);
-          l.value[a].y = y, l.value[a].x = (h.width + e.options.gap) * F, i.value[F] += h.height + d;
+          o.value[a].y = y, o.value[a].x = (h.width + e.options.gap) * F, i.value[F] += h.height + d;
         }
       }
       e.options.bottomLoading && v(), x("onloaded");
@@ -303,7 +303,7 @@ const P = { class: "sign-board-box" }, T = ["width", "height"], j = /* @__PURE__
       let d = s - f;
       if (d > 0) {
         for (let a = 0; a < d; a++)
-          l.value.push({ x: 0, y: 0 });
+          o.value.push({ x: 0, y: 0 });
         for (let a = f; a < s; a++)
           e.options.data[a].width = t, e.options.data[a].imgWidth || (e.options.data[a].imgWidth = t);
         b(f, s);
@@ -324,7 +324,7 @@ const P = { class: "sign-board-box" }, T = ["width", "height"], j = /* @__PURE__
           id: "gooseWaterFallItem" + a,
           style: k({
             width: d.width + "px",
-            transform: `translate(${Number((h = L(l)[a]) == null ? void 0 : h.x)}px, ${Number((y = L(l)[a]) == null ? void 0 : y.y)}px)`
+            transform: `translate(${Number((h = L(o)[a]) == null ? void 0 : h.x)}px, ${Number((y = L(o)[a]) == null ? void 0 : y.y)}px)`
           })
         }, [
           W(s.$slots, "default", { item: d })

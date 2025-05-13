@@ -100,6 +100,7 @@ onMounted(() => {
     // 添加鼠标悬浮时滚轮滚动功能
     if (scrollOptions.value.isStop) {
       deSeamlessScrollBox.value.addEventListener('wheel', (event: any) => {
+        event.preventDefault()
       // 滚轮向上 deltaY负数 滚轮向下 deltaY正数
         if (scrollOptions.value.direction === 'up' || scrollOptions.value.direction === 'down') {
           if (event.deltaY < 0) {
