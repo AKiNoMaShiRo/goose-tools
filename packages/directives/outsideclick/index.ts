@@ -8,7 +8,7 @@ const outsideclick = {
     onClick = function (e) {
       if (!el.contains(e.target)) {
         if (Object.prototype.toString.apply(binding.value).includes('Function')) {
-          binding.value()
+          binding.value(e)
         }
       }
     }
