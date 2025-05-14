@@ -1,4 +1,4 @@
-import { defineComponent as F, ref as w, onMounted as k, createElementBlock as $, openBlock as E, createElementVNode as B, computed as D, reactive as R, normalizeClass as C, unref as L, renderSlot as I, nextTick as Y, watch as q, onBeforeUnmount as X, normalizeStyle as _, withDirectives as O, Fragment as P, renderList as T, vShow as j } from "vue";
+import { defineComponent as F, ref as b, onMounted as k, createElementBlock as $, openBlock as E, createElementVNode as B, computed as D, reactive as R, normalizeClass as C, unref as w, renderSlot as I, nextTick as Y, watch as q, onBeforeUnmount as X, normalizeStyle as _, withDirectives as O, Fragment as P, renderList as T, vShow as j } from "vue";
 function A(v, u) {
   const s = v;
   return s.install = (e) => {
@@ -34,7 +34,7 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
     }
   },
   setup(v, { expose: u }) {
-    const s = v, e = w(null);
+    const s = v, e = b(null);
     let l = null, n = [], i = -1, r = { x: null, y: null };
     function y(t) {
       (Math.abs(t.offsetX - r.x) >= 1 || Math.abs(t.offsetY - r.y) >= 1) && (l.strokeStyle = s.color, l.lineWidth = s.lineWidth, l.lineJoin = "round", l.beginPath(), l.moveTo(r.x, r.y), r.x = t.offsetX, r.y = t.offsetY, l.lineTo(r.x, r.y), n[i].push({ x: t.offsetX, y: t.offsetY }), l.stroke());
@@ -58,7 +58,7 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
         i -= 1;
       }
     }
-    function b() {
+    function L() {
       if (i < n.length - 1) {
         i++;
         for (let t = 0; t < n[i].length - 1; t++)
@@ -69,7 +69,7 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
       let t = document.createElement("a");
       t.href = e.value.toDataURL(), t.download = "sign.png", t.click(), document.removeChild(t);
     }
-    return u({ clear: o, back: x, restore: b, download: W }), (t, m) => (E(), $("div", z, [
+    return u({ clear: o, back: x, restore: L, download: W }), (t, m) => (E(), $("div", z, [
       B("canvas", {
         ref_key: "deSignBoard",
         ref: e,
@@ -96,7 +96,7 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
       direction: "up",
       scrollNum: 5,
       isStop: !0
-    }, e = D(() => Object.assign(s, u.options)), l = w(null), n = w(null), i = w(null), r = w(), o = R({
+    }, e = D(() => Object.assign(s, u.options)), l = b(null), n = b(null), i = b(null), r = b(), o = R({
       up: [0, 0],
       down: [0, -100],
       left: [0, 0],
@@ -105,8 +105,8 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
     function x() {
       r.value && (cancelAnimationFrame(r.value), r.value = null);
     }
-    function b() {
-      x(), e.value.direction === "up" ? o[1] > -100 ? o[1] -= e.value.speed : o[1] = 0 : e.value.direction === "down" ? o[1] < 0 ? o[1] += e.value.speed : o[1] = -100 : e.value.direction === "left" ? o[0] > -100 ? o[0] -= e.value.speed : o[0] = 0 : e.value.direction === "right" && (o[0] < 0 ? o[0] += e.value.speed : o[0] = -100), n.value.style.transform = `translateX(${o[0]}%) translateY(${o[1]}%)`, i.value.style.transform = `translateX(${o[0]}%) translateY(${o[1]}%)`, r.value = requestAnimationFrame(b);
+    function L() {
+      x(), e.value.direction === "up" ? o[1] > -100 ? o[1] -= e.value.speed : o[1] = 0 : e.value.direction === "down" ? o[1] < 0 ? o[1] += e.value.speed : o[1] = -100 : e.value.direction === "left" ? o[0] > -100 ? o[0] -= e.value.speed : o[0] = 0 : e.value.direction === "right" && (o[0] < 0 ? o[0] += e.value.speed : o[0] = -100), n.value.style.transform = `translateX(${o[0]}%) translateY(${o[1]}%)`, i.value.style.transform = `translateX(${o[0]}%) translateY(${o[1]}%)`, r.value = requestAnimationFrame(L);
     }
     function W() {
       x();
@@ -115,10 +115,10 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
       u.scrollData.length >= e.value.scrollNum && W();
     }
     function m() {
-      u.scrollData.length >= e.value.scrollNum && (r.value = requestAnimationFrame(b));
+      u.scrollData.length >= e.value.scrollNum && (r.value = requestAnimationFrame(L));
     }
     return k(() => {
-      u.scrollData.length >= e.value.scrollNum && (r.value = requestAnimationFrame(b), e.value.isStop && l.value.addEventListener("wheel", (p) => {
+      u.scrollData.length >= e.value.scrollNum && (r.value = requestAnimationFrame(L), e.value.isStop && l.value.addEventListener("wheel", (p) => {
         if (p.preventDefault(), e.value.direction === "up" || e.value.direction === "down")
           if (p.deltaY < 0) {
             let g = o[1] + e.value.wheelSpeed;
@@ -141,7 +141,7 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
       ref_key: "deSeamlessScrollBox",
       ref: l,
       class: C(["seamless-scroll-box", {
-        flex: L(e).direction === "left" || L(e).direction === "right"
+        flex: w(e).direction === "left" || w(e).direction === "right"
       }]),
       onMouseenter: t,
       onMouseleave: m
@@ -192,7 +192,7 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
   },
   setup(v) {
     const u = v;
-    let s = w(null), e = w(null), l = w([]), n, i = 10, r = 0, y;
+    let s = b(null), e = b(null), l = b([]), n, i = 10, r = 0, y;
     k(() => {
       i = u.amount, console.log(i), n = e.value.getBoundingClientRect().height, s.value.style.transform = "translateY(0)", l.value = u.dataList.slice(0, i), Y(() => {
         t = s.value.children[0].getBoundingClientRect().height, console.log(t), y = requestAnimationFrame(m), u.hoverStop && s.value.addEventListener("wheel", (p) => {
@@ -206,7 +206,7 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
     function x() {
       u.hoverStop && o();
     }
-    function b() {
+    function L() {
       u.hoverStop && m();
     }
     function W(p) {
@@ -225,10 +225,10 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
         ref_key: "virtualInfiniteScrollList",
         ref: s,
         onMouseenter: x,
-        onMouseleave: b,
+        onMouseleave: L,
         onScroll: W
       }, [
-        I(p.$slots, "default", { slotItem: L(l) })
+        I(p.$slots, "default", { slotItem: w(l) })
       ], 544)
     ], 512));
   }
@@ -240,7 +240,7 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
   emits: ["addData", "onloaded"],
   setup(v, { expose: u, emit: s }) {
     const e = v;
-    let l = 0, n = w([]), i = w([]), r = D(() => Math.max(...i.value)), y = w(!0), o = {}, x, b = 0;
+    let l = 0, n = b([]), i = b([]), r = D(() => Math.max(...i.value)), y = b(!0), o = {}, x, L = 0;
     const W = s;
     u({
       changeLoading: t
@@ -317,13 +317,13 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
     }), k(() => {
       m(), p(0, e.options.data.length), x = document.getElementById("gooseWaterFallLoadMore");
       let d = document.getElementById("gooseWaterFallLoading");
-      d && (b = d.clientHeight);
+      d && (L = d.clientHeight);
     }), X(() => {
       e.options.bottomLoading && o && x && o.unobserve(x);
     }), (d, f) => (E(), $("section", {
       id: "gooseWaterFallContainer",
       class: "goose-water-fall-container",
-      style: _({ height: L(r) + (e.options.bottomLoading ? L(b) : 0) + "px" })
+      style: _({ height: w(r) + (e.options.bottomLoading ? w(L) : 0) + "px" })
     }, [
       (E(!0), $(P, null, T(e.options.data, (c, a) => {
         var h, S;
@@ -332,7 +332,8 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
           id: "gooseWaterFallItem" + a,
           style: _({
             width: c.width + "px",
-            transform: `translate(${Number((h = L(n)[a]) == null ? void 0 : h.x)}px, ${Number((S = L(n)[a]) == null ? void 0 : S.y)}px)`
+            transform: `translate(${Number((h = w(n)[a]) == null ? void 0 : h.x)}px, ${Number((S = w(n)[a]) == null ? void 0 : S.y)}px)`,
+            opacity: w(y) ? 0 : 1
           })
         }, [
           I(d.$slots, "default", { item: c })
@@ -343,7 +344,7 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
         class: "goose-water-fall-load-more",
         style: _({
           left: "0px",
-          top: `${Math.max(...L(i))}px`
+          top: `${Math.max(...w(i))}px`
         })
       }, null, 4),
       O(B("div", {
@@ -351,7 +352,7 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
         class: "goose-water-fall-loading",
         style: _({
           left: "0px",
-          top: `${Math.max(...L(i))}px`
+          top: `${Math.max(...w(i))}px`
         })
       }, [
         I(d.$slots, "loading", {}, () => [
@@ -360,7 +361,7 @@ const z = { class: "sign-board-box" }, G = ["width", "height"], J = /* @__PURE__
           ], -1))
         ])
       ], 4), [
-        [j, L(y)]
+        [j, w(y)]
       ])
     ], 4));
   }

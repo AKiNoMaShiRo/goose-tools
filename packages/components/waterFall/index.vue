@@ -26,7 +26,7 @@ const props = defineProps<{
 }>();
 
 // // 内容数组
-// let dataList: Array<IWaterFallItem> = [];
+// let dataList = ref([] as IWaterFallItem[]);
 // 内容项宽度
 let cardWidth = 0;
 // data项位置
@@ -55,7 +55,6 @@ function changeLoading (value) {
 
 // 初始化 
 function init() {
-  // dataList = JSON.parse(JSON.stringify(props.options.data))
   // 计算宽度
   let containerWidth = document.getElementById('gooseWaterFallContainer')?.clientWidth || 0
   cardWidth = (containerWidth - props.options.gap * (props.options.column - 1)) / props.options.column
@@ -64,10 +63,6 @@ function init() {
   for (let i = 0; i < props.options.data.length; i++) {
     positionArr.value.push({ x: 0, y: 0 })
   }
-  // new Array(props.options.column).fill({ x: 0, y: 0 })
-  // positionArr = temp.map(() => {
-  //   return { x: 0, y: 0 }
-  // })
   // 初始化每列总高度数组
   columnHeight.value = new Array(props.options.column).fill(0)
   // 初始化图片宽度（未设置时等于卡片宽度）、初始化每项宽度为列宽
@@ -100,7 +95,6 @@ function calculateHeight(start, end) {
           item.height = dom.clientHeight
         }
       })
-      // console.log('props.options.data', props.options.data)
       // 计算位置
       calculatePosition(start, end)
     })
@@ -122,26 +116,20 @@ function preloadImageHeight (imgUrl, imgWidth) {
 }
 
 function calculatePosition(start, end) {
-  // console.log('calculatePosition arg', start, end)
   let itemBottomGap = props.options.itemBottomGap || 0
   for (let i = start; i < end; i++) {
     let item = props.options.data[i]
-    // console.log('item', item)
     if (i < props.options.column) {
       columnHeight.value[i] += item.height + itemBottomGap
       positionArr.value[i].y = 0
       positionArr.value[i].x = (item.width + props.options.gap) * i
-      // console.log('calculatePosition positionArr <=', positionArr.value[i])
     } else {
       let minHeight = Math.min(...columnHeight.value)
       let index = columnHeight.value.indexOf(minHeight)
-      // console.log('calculatePosition', minHeight, index)
       positionArr.value[i].y = minHeight
       positionArr.value[i].x = (item.width + props.options.gap) * index
       columnHeight.value[index] += item.height + itemBottomGap
-      // console.log('calculatePosition positionArr >', positionArr.value[i])
     }
-    // console.log('columnHeight', columnHeight.value)
   }
   
   if (props.options.bottomLoading) {
@@ -217,6 +205,7 @@ onBeforeUnmount(() => {
       :style="{
         'width': item.width + 'px',
         'transform': `translate(${Number(positionArr[index]?.x)}px, ${Number(positionArr[index]?.y)}px)`,
+        'opacity': loading ? 0 : 1,
       }"
     >
       <!-- <div v-show="!loading"> -->

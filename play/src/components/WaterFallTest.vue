@@ -43,6 +43,7 @@ function addData () {
       width: fit-content;
       height: 300px;
       overflow-y: auto;
+      border: 1px solid red;
     "
   >
     <WaterFall
